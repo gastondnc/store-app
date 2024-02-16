@@ -1,7 +1,13 @@
+import { HeadboardCart } from "../../components/HeadboardCart"
 
 
 export const Cart = () => {
     return (
-        <div>Cart</div>
+        <>
+            <HeadboardCart
+                title={'Products in the cart'}
+                description={'Here you have all the products added to your cart'}
+            />
+        </>
     )
 }

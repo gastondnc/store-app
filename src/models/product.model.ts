@@ -1,4 +1,4 @@
-export interface Product {
+export type Product = {
     id: number;
     title: string;
     price: number;
@@ -11,13 +11,10 @@ export interface Product {
     totalPrice?: number;
 }
 
-
-
-export interface Rating {
+export type Rating = {
     rate: number;
     count: number;
 }
-
 
 export enum Category {
     Electronics = "electronics",
@@ -25,5 +22,20 @@ export enum Category {
     MenSClothing = "mens clothing",
     WomenSClothing = "womens clothing",
 }
+
+export type CategoryOption = {
+    label: string;
+    value: string;
+}
+
+export type StateProduct = {
+    products: Product[];
+    selectedCategory: string;
+}
+
+
+
+
+
 
 
