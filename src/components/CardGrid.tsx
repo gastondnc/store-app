@@ -14,15 +14,13 @@ export const CardGrid = ({ products }: Props) => {
                         return (
                             <Card
                                 key={product.id}
-                                {
-                                ...product
-
-                                }
+                                
+                                product={product}
                             />
                         )
                     })
                 }
-            </div>Ï
+            </div>
         </>
     )
 }

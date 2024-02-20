@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { ProductsProvider } from "../../context/products/ProductsProvider";
+import { CartProvider } from "../../context/cart/CartProvider";
 
 
 
@@ -9,12 +10,14 @@ const Layout = () => {
     return (
 
         <>
-            <Header />
+            <CartProvider>
+                <Header />
                 <ProductsProvider>
                     <div className="p-4 mx-auto">
                         <Outlet />
                     </div>
                 </ProductsProvider>
+            </CartProvider>
             <Footer />
         </>
     )

@@ -9,6 +9,7 @@ export type Product = {
     stock: number;
     quantity?: number;
     totalPrice?: number;
+    isFav: boolean;
 }
 
 export type Rating = {
