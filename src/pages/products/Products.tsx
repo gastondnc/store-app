@@ -1,25 +1,24 @@
 import { useContext, useEffect } from "react";
-import { CardGrid } from "../../components/CardGrid";
-import { HeadBoardSelected } from "../../components/HeadBoardSelected";
-import { Spinner } from "../../components/Spinner";
-import { useFetch } from "../../hooks/useFetch";
+import { CardGrid } from "../../components/cards-components/CardGrid";
+import { HeadBoardSelected } from "../../shared/headboard-components/HeadBoardSelected";
 import { CategoryOption, Product } from "../../models/product.model";
-import { URL_PRODUCTS } from "../../utils/endpoints";
 import { ProductsContext } from "../../context/products/ProductsContext";
+import { Spinner } from "flowbite-react";
 
 
 
 export const Products = () => {
-    const { fetchResponse, fetchIsLoading } = useFetch<Product>(URL_PRODUCTS);
-    const {changeProducts, stateProduct} = useContext(ProductsContext)
+    
+    const {changeProducts, stateProduct, fetchIsLoading} = useContext(ProductsContext)
     console.log('STATE-PRODUCTS',stateProduct)
+    const products: Product[] = stateProduct.products
 
     const filterProducts = (selectedCategory: string) => {
         let filtered: Product[] = []
         if (selectedCategory === '') {
-            filtered = [...fetchResponse]
+            filtered = [...products]
         } else {
-            filtered = fetchResponse.filter((product: Product) => {
+            filtered = products.filter((product: Product) => {
                 return product.category === selectedCategory
             })
         }
@@ -27,10 +26,10 @@ export const Products = () => {
     }
 
     const buildCategories = (): CategoryOption[] => {
-        if (fetchResponse) {
+        if (products) {
             const all = { value: '', label: 'all products' }
             const categories: CategoryOption[] = [all];
-            fetchResponse.forEach((product: Product) => {
+            products.forEach((product: Product) => {
                 const objOptions = {
                     value: product.category,
                     label: product.category
@@ -44,10 +43,6 @@ export const Products = () => {
             return []
         }
     }
-
-    useEffect(() => {
-        changeProducts(fetchResponse)
-    }, [fetchResponse])
 
     useEffect(() => {
         if(stateProduct) {
@@ -64,11 +59,12 @@ export const Products = () => {
             />
 
             {
-                fetchIsLoading && !fetchResponse
-                    ? <Spinner />
-                    : <CardGrid
-                        products={stateProduct.products || []}
+                        fetchIsLoading
+                        ? <Spinner/>
+                        :<CardGrid
+                            products={products || []}
                         />
+                        
             }
         </>
     )

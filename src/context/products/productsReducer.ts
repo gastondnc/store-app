@@ -1,8 +1,8 @@
 import { Product, StateProduct } from "../../models/product.model";
 
 type ProductsAction = {
-    type: 'category' | 'products'; // Action //
-    payload: string | Product[];  // Value //
+    type: 'category' | 'products' | 'favs'; // Action //
+    payload: string | Product[] | number[];  // Value //
 }
 
 export const productsReducer = (state: StateProduct, action: ProductsAction): StateProduct => {
@@ -19,6 +19,11 @@ export const productsReducer = (state: StateProduct, action: ProductsAction): St
             return{
                 ...state,
                 products: action.payload as Product[]
+            }
+        case 'favs':
+            return{
+                ...state,
+                favs: action.payload as number[]
             }
 
             default:

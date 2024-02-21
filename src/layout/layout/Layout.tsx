@@ -11,8 +11,8 @@ const Layout = () => {
 
         <>
             <CartProvider>
-                <Header />
                 <ProductsProvider>
+                    <Header />
                     <div className="p-4 mx-auto">
                         <Outlet />
                     </div>

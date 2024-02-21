@@ -1,14 +1,13 @@
-import { Headboard } from "../../components/Headboard";
-import { CardGrid } from "../../components/CardGrid";
-import { Spinner } from "../../components/Spinner";
-import { useFetch } from "../../hooks/useFetch";
-import { URL_PRODUCTS } from "../../utils/endpoints";
-import { Product } from "../../models/product.model";
+import { Headboard } from "../../shared/headboard-components/Headboard";
+import { CardGrid } from "../../components/cards-components/CardGrid";
+import { Spinner } from "../../shared/Spinner";
+import { useContext } from "react";
+import { ProductsContext } from "../../context/products/ProductsContext";
 
 
 export const Home = () => {
-    const { fetchResponse, fetchIsLoading } = useFetch<Product>(URL_PRODUCTS);
-    console.log('HOME',fetchResponse)
+    const{ stateProduct, fetchIsLoading } = useContext(ProductsContext)
+    console.log('HOME',stateProduct)
     return (
         <>
             <Headboard
@@ -17,10 +16,10 @@ export const Home = () => {
             />
 
             {
-                fetchIsLoading && !fetchResponse
+                    fetchIsLoading
                     ? <Spinner />
                     : <CardGrid
-                        products={fetchResponse || []}
+                        products={stateProduct.products || []}
                     />
             }
 

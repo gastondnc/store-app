@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext, useState } from "react";
-import { CategoryOption } from "../models/product.model";
-import { ProductsContext } from "../context/products/ProductsContext";
+import { CategoryOption } from "../../models/product.model";
+import { ProductsContext } from "../../context/products/ProductsContext";
 
 type Props = {
     options: CategoryOption[];

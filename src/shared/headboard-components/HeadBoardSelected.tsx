@@ -1,5 +1,5 @@
-import { CategoryOption } from "../models/product.model";
-import { Select } from "./Select";
+import { CategoryOption } from "../../models/product.model";
+import { Select } from "../../components/select-component/Select";
 
 type Props = {
     title: string;

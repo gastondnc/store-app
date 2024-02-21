@@ -31,6 +31,7 @@ export type CategoryOption = {
 
 export type StateProduct = {
     products: Product[];
+    favs: number[];
     selectedCategory: string;
 }
 

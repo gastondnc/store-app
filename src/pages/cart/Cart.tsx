@@ -1,19 +1,19 @@
 import { useContext } from "react";
-import { HeadboardCart } from "../../components/HeadboardCart";
+import { HeadboardCart } from "../../shared/headboard-components/HeadboardCart";
 import { CartContext } from "../../context/cart/CartContext";
 import { Product } from "../../models/product.model";
-import { CartItem } from "../../components/CartItem";
+import { CartItem } from "../../components/cart-component/CartItem";
 
 
 export const Cart = () => {
     const { stateCart, removeProduct, addProduct } = useContext(CartContext);
     const cart: Product[] = stateCart.cart
-    const getTotalPrice = () => {
+    const getTotalPrice = (): number => {
         let totalPrice = 0;
         cart.forEach((product: Product) => {
             totalPrice = totalPrice + (product.price * product.quantity!)
         })
-        return totalPrice.toFixed(2); 
+        return Number(totalPrice.toFixed(2)) ;
     }
 
     return (
@@ -21,6 +21,9 @@ export const Cart = () => {
             <HeadboardCart
                 title={'Products in the cart'}
                 description={'Here you have all the products added to your cart'}
+                totalTitle={'Total: €'}
+                totalPrice={getTotalPrice()}
+                noItems={'You have no items in your shopping cart'}
             />
             {
                 cart.map(product => {
@@ -35,10 +38,6 @@ export const Cart = () => {
                     )
                 })
             }
-
-            <div className="bg-gray-800 p-4 rounded-md shadow-lg md:max-w-96 my-4">
-                <h3 className="text-gray-200 font-bold text-2xl">Total: €{getTotalPrice()}</h3>
-            </div>
 
         </>
     )
