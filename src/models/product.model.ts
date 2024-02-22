@@ -17,12 +17,7 @@ export type Rating = {
     count: number;
 }
 
-export enum Category {
-    Electronics = "electronics",
-    Jewelery = "jewelery",
-    MenSClothing = "mens clothing",
-    WomenSClothing = "womens clothing",
-}
+
 
 export type CategoryOption = {
     label: string;

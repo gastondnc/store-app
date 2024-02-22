@@ -1,7 +1,7 @@
+import { useContext } from "react";
 import { Headboard } from "../../shared/headboard-components/Headboard";
 import { CardGrid } from "../../components/cards-components/CardGrid";
 import { Spinner } from "../../shared/Spinner";
-import { useContext } from "react";
 import { ProductsContext } from "../../context/products/ProductsContext";
 
 

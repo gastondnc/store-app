@@ -119,7 +119,7 @@ const Header = () => {
                                 </a>
                             </li>
                             <li>
-                                <a
+                                <NavLink to="cart"
                                     type="button"
                                     className="flex gap-2 items-center text-white font-medium rounded-lg text-sm"
                                 >
@@ -133,7 +133,7 @@ const Header = () => {
                                             </svg>
                                     }
                                     {stateProduct?.favs.length}
-                                </a>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>

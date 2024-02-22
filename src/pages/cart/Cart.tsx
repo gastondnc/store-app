@@ -3,6 +3,7 @@ import { HeadboardCart } from "../../shared/headboard-components/HeadboardCart";
 import { CartContext } from "../../context/cart/CartContext";
 import { Product } from "../../models/product.model";
 import { CartItem } from "../../components/cart-component/CartItem";
+import { CheckOut } from "../../components/checkout-component/CheckOut";
 
 
 export const Cart = () => {
@@ -13,7 +14,7 @@ export const Cart = () => {
         cart.forEach((product: Product) => {
             totalPrice = totalPrice + (product.price * product.quantity!)
         })
-        return Number(totalPrice.toFixed(2)) ;
+        return Number(totalPrice.toFixed(2));
     }
 
     return (
@@ -25,20 +26,24 @@ export const Cart = () => {
                 totalPrice={getTotalPrice()}
                 noItems={'You have no items in your shopping cart'}
             />
-            {
-                cart.map(product => {
-                    return (
-                        <CartItem
-                            key={product.id}
-                            product={product}
-                            removeProduct={removeProduct}
-                            addProduct={addProduct}
-                        />
+            <div className="grid grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-3 my-4">
+            
+                {
+                    cart.map(product => {
+                        return (
+                            <CartItem
+                                key={product.id}
+                                product={product}
+                                removeProduct={removeProduct}
+                                addProduct={addProduct}
+                            />
 
-                    )
-                })
-            }
-
+                        )
+                    })
+                }
+                <CheckOut/>
+                
+            </div>
         </>
     )
 }
