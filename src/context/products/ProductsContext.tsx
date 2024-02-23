@@ -7,6 +7,7 @@ export type ProductContextProps = {
     changeProducts: (newProducts: Product[]) => void;
     setProductFav: (productId: number, status: boolean) => void;
     fetchIsLoading: boolean;
+    getPromoCategories: () => string[]
 }
 
 export const ProductsContext = createContext<ProductContextProps>({} as ProductContextProps);

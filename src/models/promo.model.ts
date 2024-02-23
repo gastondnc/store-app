@@ -3,6 +3,6 @@ export type Promo = {
     discount: number;
     title: string;
     categoriesId: number[];
-    startDate: number;
-    endDate: number;
+    startDate: string;
+    endDate: string;
 }

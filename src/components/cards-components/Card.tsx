@@ -3,6 +3,7 @@ import { Product } from "../../models/product.model";
 import { CartContext } from "../../context/cart/CartContext";
 import { useToggle } from "../../hooks/useToggle";
 import { ProductsContext } from "../../context/products/ProductsContext";
+import { getPriceWithDiscount } from "../../utils/helpers";
 
 type Props = {
     product: Product
@@ -11,11 +12,31 @@ type Props = {
 export const Card = ({ product }: Props) => {
     const { title, description, price, image } = product;
     const { addProduct } = useContext(CartContext);
-    const{ setProductFav } = useContext(ProductsContext);
+    const{ setProductFav, stateProduct, getPromoCategories} = useContext(ProductsContext);
     const [isActive, setIsActive] = useToggle(false);
+    const { promo } = stateProduct
+
     const handleIsActive = () => {
         setIsActive(!isActive)
         setProductFav(product.id ,!isActive)
+    }
+    
+
+    const isPromo = (): boolean=> {
+        // return getPromoCategories().includes(product.category)
+        return getPromoCategories().some(cat => cat === product.category)
+    }
+
+    const promos = () => {
+        return isPromo()
+                    ? (
+                        <div>
+                            <p className="text-white font-bold line-through">Price: {price}</p>
+                            <p className="text-white font-bold">Discount: {promo?.discount}%</p>
+                            <p className="text-white font-bold">Actual Price: {getPriceWithDiscount(product.price, promo?.discount)}</p>
+                        </div>
+                    )
+                    : <p className="text-white font-bold">Price: {price}</p>
     }
 
     return (
@@ -29,7 +50,7 @@ export const Card = ({ product }: Props) => {
                         <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
                     </a>
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 truncate">{description}</p>
-                    <p className="text-white font-bold">Price: {price}</p>
+                        {promos()}
                     <div className="flex justify-center mt-4">
                         <button
                             onClick={() => addProduct(product)}

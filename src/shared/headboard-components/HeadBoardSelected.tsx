@@ -8,6 +8,7 @@ type Props = {
 }
 
 export const HeadBoardSelected = ({ title, description, categories }: Props) => {
+
     return (
         <>
             <section className="bg-white dark:bg-gray-900 rounded-md">

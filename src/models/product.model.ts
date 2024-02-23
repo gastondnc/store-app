@@ -1,3 +1,5 @@
+import { Promo } from "./promo.model";
+
 export type Product = {
     id: number;
     title: string;
@@ -28,6 +30,7 @@ export type StateProduct = {
     products: Product[];
     favs: number[];
     selectedCategory: string;
+    promo: Promo | null;
 }
 
 

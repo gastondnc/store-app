@@ -1,18 +1,18 @@
 export const CATEGORIES_MOCK = [
     {
         id: 1,
-        name: "Electronics",
+        name: "electronics",
     }, 
     {
         id: 2,
-        name: "Jewelery",
+        name: "jewelery",
     }, 
     {
         id: 3,
-        name: "Mens clothing",
+        name: "men's clothing",
     }, 
     {
         id: 4,
-        name: "Womens clothing",
+        name: "womens clothing",
     }, 
 ]

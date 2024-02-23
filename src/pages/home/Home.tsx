@@ -7,7 +7,7 @@ import { ProductsContext } from "../../context/products/ProductsContext";
 
 export const Home = () => {
     const{ stateProduct, fetchIsLoading } = useContext(ProductsContext)
-    console.log('HOME',stateProduct)
+
     return (
         <>
             <Headboard

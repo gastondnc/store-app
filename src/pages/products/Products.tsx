@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CardGrid } from "../../components/cards-components/CardGrid";
 import { HeadBoardSelected } from "../../shared/headboard-components/HeadBoardSelected";
 import { CategoryOption, Product } from "../../models/product.model";
@@ -9,8 +9,8 @@ import { Spinner } from "flowbite-react";
 
 export const Products = () => {
     
-    const {changeProducts, stateProduct, fetchIsLoading} = useContext(ProductsContext)
-    console.log('STATE-PRODUCTS',stateProduct)
+    const {stateProduct, fetchIsLoading} = useContext(ProductsContext)
+    const[filtered, setFiltered] = useState<Product[]>()
     const products: Product[] = stateProduct.products
 
     const filterProducts = (selectedCategory: string) => {
@@ -22,7 +22,8 @@ export const Products = () => {
                 return product.category === selectedCategory
             })
         }
-        changeProducts(filtered)
+        setFiltered(filtered)
+        //changeProducts(filtered)
     }
 
     const buildCategories = (): CategoryOption[] => {
@@ -48,7 +49,7 @@ export const Products = () => {
         if(stateProduct) {
             filterProducts(stateProduct.selectedCategory)
         }
-    }, [stateProduct.selectedCategory])
+    }, [stateProduct.selectedCategory, products])
 
     return (
         <>
@@ -62,7 +63,7 @@ export const Products = () => {
                         fetchIsLoading
                         ? <Spinner/>
                         :<CardGrid
-                            products={products || []}
+                            products={filtered || []}
                         />
                         
             }

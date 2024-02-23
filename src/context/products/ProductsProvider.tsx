@@ -4,11 +4,14 @@ import { ProductsContext } from "./ProductsContext";
 import { productsReducer } from "./productsReducer";
 import { URL_PRODUCTS } from "../../utils/endpoints";
 import { useFetch } from "../../hooks/useFetch";
+import { usePromo } from "../../hooks/usePromo";
+
 
 const INITIAL_STATE: StateProduct = {
     products: [],
     favs: [],
-    selectedCategory: ''
+    selectedCategory: '',
+    promo: null
 }
 
 type Props = {
@@ -18,6 +21,7 @@ type Props = {
 export const ProductsProvider = ({ children }: Props) => {
     const { fetchResponse, fetchIsLoading } = useFetch<Product>(URL_PRODUCTS);
     const [stateProduct, dispatch] = useReducer(productsReducer, INITIAL_STATE);
+    const { promo, getPromoCategories } = usePromo();
 
     const changeCategory = (newCategory: string) => {
         dispatch({ type: 'category', payload: newCategory })
@@ -52,6 +56,10 @@ export const ProductsProvider = ({ children }: Props) => {
         return  JSON.parse(localStorage.getItem('favs') || '[]') 
     } 
 
+    useEffect( () => {
+        dispatch({type: 'promo', payload: promo})
+
+    }, [promo])
 
 
     useEffect(() => {
@@ -70,7 +78,7 @@ export const ProductsProvider = ({ children }: Props) => {
     }, [fetchResponse])
 
     return (
-        <ProductsContext.Provider value={{ stateProduct, changeCategory, changeProducts, setProductFav, fetchIsLoading }}>
+        <ProductsContext.Provider value={{ stateProduct, changeCategory, changeProducts, setProductFav, fetchIsLoading, getPromoCategories }}>
             {children}
         </ProductsContext.Provider>
     )

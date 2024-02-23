@@ -24,7 +24,6 @@ export const useFetch = <T>(initialUrl?: string): UseFetchReturn<T> => {
                 return resp.json()
             })
             .then(data => {
-                // console.log('DATAAAAAAA',data)
                 if(Object.keys(data).length === 0){
                     setResponse([])
                     throw new Error('Upsss, hubo un ERROR 0X0000FFFFeEEEQUETEPARIO')   

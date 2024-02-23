@@ -8,9 +8,7 @@ import { ProductsContext } from '../../context/products/ProductsContext';
 const Header = () => {
     const { stateCart } = useContext(CartContext)
     const { stateProduct } = useContext(ProductsContext)
-    console.log('FAV_PRODUCT', stateProduct?.favs)
 
-    console.log('HEADER-CART', stateCart.cart.length)
     const navClass = (isActive: boolean) => `
     ${isActive ? 'dark:text-blue-500' : 'dark:text-gray-100'}
     block py-2 px-3 trounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
@@ -79,20 +77,21 @@ const Header = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/about"
-                                    className={({ isActive }) => navClass(isActive)}
-                                >
-                                    About
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
                                     to="/cart"
                                     className={({ isActive }) => navClass(isActive)}
                                 >
                                     Cart
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink
+                                    to="/about"
+                                    className={({ isActive }) => navClass(isActive)}
+                                >
+                                    About
+                                </NavLink>
+                            </li>
+                            
                             <li>
                                 <NavLink
                                     to="/contact"

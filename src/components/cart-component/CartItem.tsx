@@ -1,5 +1,8 @@
 
+import { useContext } from "react";
 import { Product } from "../../models/product.model";
+import { ProductsContext } from "../../context/products/ProductsContext";
+import { getPriceWithDiscount } from "../../utils/helpers";
 
 type Props = {
     product: Product;
@@ -9,6 +12,13 @@ type Props = {
 
 export const CartItem = ({ product, removeProduct, addProduct }: Props) => {
     const { title, description, price, image, id, quantity } = product;
+    const { stateProduct, getPromoCategories } = useContext(ProductsContext);
+    const { promo } = stateProduct;
+
+    const isPromo = (): boolean => {
+        // return getPromoCategories().includes(product.category)
+        return getPromoCategories().some(cat => cat === product.category)
+    }
 
     return (
         <>
@@ -18,7 +28,17 @@ export const CartItem = ({ product, removeProduct, addProduct }: Props) => {
                     <div className="flex flex-col">
                         <h6 className=" max-w-lg mb-2 text-2xl font-medium truncate text-gray-900 dark:text-white">{title}</h6>
                         <p className="max-w-md mb-3 font-normal text-gray-700 dark:text-gray-400 truncate">{description}</p>
-                        <p className="text-white text-xl font-bold">Price: €{price}</p>
+                        {
+                            isPromo()
+                                ? (
+                                    <div>
+                                        <p className="text-white font-bold line-through">Price: {price}</p>
+                                        <p className="text-white font-bold">Discount: {promo?.discount}%</p>
+                                        <p className="text-white font-bold">Actual Price: {getPriceWithDiscount(product.price, promo?.discount)}</p>
+                                    </div>
+                                )
+                                : <p className="text-white font-bold">Price: {price}</p>
+                        }
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -39,6 +59,7 @@ export const CartItem = ({ product, removeProduct, addProduct }: Props) => {
         </>
     )
 }
+
 
 
 
